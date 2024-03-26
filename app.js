@@ -14,8 +14,15 @@ class ProductManager {
 	addProduct(product) {
 		let lastIndexOfProducts = Products.length;
 		this.code = lastIndexOfProducts++;
-		this.products.push(product);
-		console.log(`Producto ${this.code} agregado\n\n`);
+
+		const values = Object.values(product);
+		const notProvided = values.includes(undefined);
+		if (notProvided) {
+			console.log('Please provide all the required fields\n\n');
+		} else {
+			this.products.push(product);
+			console.log(`Producto ${this.code} agregado\n\n`);
+		}
 	}
 
 	getProducts() {
@@ -51,7 +58,7 @@ let product;
 product = new ProductManager('Agua', 'Fresca', 10, 'http://google.com', 5);
 product.addProduct(product);
 
-product = new ProductManager('Vino', 'Mendocino', 15, 'http://yahoo.com', 5);
+product = new ProductManager('Vino', 'Mendocino', 15, 5);
 product.addProduct(product);
 
 product = new ProductManager('cerveza', 'quilmes', 20, 'http://bing.com', 5);
@@ -59,4 +66,4 @@ product.addProduct(product);
 
 product.getProducts();
 
-product.getProductrById(1);
+product.getProductrById(2);
